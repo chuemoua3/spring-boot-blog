@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chue's Blog Site</title>
+
+    <link rel="stylesheet" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="container">
+        <div th:replace="/fragments/navbar :: navbar"></div>
+
+      <div class="row">
+          <div class="col-md">
+            <h1>Welcome to my Blog!</h1>
+          </div>    
+      </div>
+      <div class="row">
+        <div th:each="blog:${posts}">
+          <div class="col-sm">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title" th:text="${blog.title}"></h5>
+                <p th:text="${blog.author}"></p>
+                <p th:text="${blog.blogEntry}"></p>
+              </div>
+              <div class="card-footer"></div>
+              <!-- TODO -->
+            </div><!-- End of .card -->
+          </div><!-- End of .col-sm -->
+        </div><!-- End of posts loop -->
+      </div> <!-- End of first row -->
+      <div class="row">
+          <div class="col-xl">
+            <a href="/blogposts/new">
+                <button class="btn btn-primary">Submit A New Blog Post</button>
+            </a>
+          </div>
+      </div>
+    </div>
+
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="webjars/popper.js/2.0.2/umd/popper.min.js"></script>
+    <script src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

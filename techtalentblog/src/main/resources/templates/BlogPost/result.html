@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chue's Blog Site</title>
+
+    <div th:replace="/fragments/styling :: head-style"></div>
+  </head>
+  <body>
+    <div class="container">
+		<div th:replace="/fragments/navbar :: navbar"></div>
+
+		<div class="row">
+			<div class="col-xl">
+				<h3>Blog Post Form</h3>
+				<p>Thank you for your submission!</p>
+
+				<h4>Blog Post</h4>
+				<p th:text="${title}" />
+				<p th:text="${author}" />
+				<p th:text="${blogEntry}" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md">
+				<a href="/">
+					<button class="btn btn-primary">Return Home</button>
+				</a>
+				<a href="/blogposts/new">
+					<button class="btn btn-secondary">Create Another Blog Post</button>
+				</a>
+			</div>
+		</div>
+    </div>
+
+    <div th:replace="/fragments/styling :: body-links"></div>
+  </body>
+</html>
