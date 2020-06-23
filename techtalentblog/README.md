@@ -1,4 +1,5 @@
 Tech Talent Blog
+
 What makes a blog post?
 
 Main attributes:
