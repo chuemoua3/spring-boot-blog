@@ -19,6 +19,10 @@ public class BlogPostController {
 
     @GetMapping(value = "/")
     public String index(BlogPost blogPost, Model model) {
+        posts.removeAll(posts);
+        for(BlogPost post : blogPostRepository.findAll()){
+            posts.add(post);
+        }
         model.addAttribute("posts", posts);
         return "blogpost/index";
     }
@@ -36,7 +40,7 @@ public class BlogPostController {
         blogPostRepository.save(new BlogPost(blogPost.getTitle(), blogPost.getAuthor(), blogPost.getBlogEntry()));
         
         // Add new blog posts as they're created to our posts list for indexing
-        posts.add(blogPost);
+        //posts.add(blogPost);
 
         // Add attributes to our model so we can show them to the user on the results page
         model.addAttribute("title", blogPost.getTitle());

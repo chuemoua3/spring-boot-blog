@@ -1,8 +1,37 @@
+body{
+    font-family: 'Courier New', Courier, monospace
+}
+
 html {
-    background-color: #eee;
+    background-color: grey;
     padding: 0.5em 1em;
+    font-family: 'Courier New', Courier, monospace
+
 }
 
 h1,h2,h3,h4 {
     display: block;
+}
+
+/* Navbar */
+.navbar{
+    border: black solid;
+    border-radius: 10px;
+}
+
+/* Container */
+.row{
+    padding: 100px;
+}
+
+/* button from index.html */
+.btn-primary{
+    background-color: black;
+    border-color: black;
+}
+
+/* button from new.html */
+.btn-success{
+    background-color: black;
+    border-color: black;
 }
