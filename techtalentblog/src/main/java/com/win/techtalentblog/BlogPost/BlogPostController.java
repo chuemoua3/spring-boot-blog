@@ -47,14 +47,18 @@ public class BlogPostController {
         //posts.add(blogPost);
 
         // Add attributes to our model so we can show them to the user on the results page
-        model.addAttribute("title", blogPost.getTitle());
-        model.addAttribute("author", blogPost.getAuthor());
-        model.addAttribute("blogEntry", blogPost.getBlogEntry());
+        
+        //option 2 for fixing update blog post
+        model.addAttribute("blogPost", blogPost);
+        
+        // model.addAttribute("title", blogPost.getTitle());
+        // model.addAttribute("author", blogPost.getAuthor());
+        // model.addAttribute("blogEntry", blogPost.getBlogEntry());
         return "blogpost/result";
     }
     // Similar to @PostMapping or @GetMapping, but allows for @PathVariable
     // Spring takes whatever value is in {id} and passes it to our method params using @PathVariable
-    @RequestMapping(value = "/blogposts{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
     public String editPostWithId(@PathVariable Long id, BlogPost blogPost, Model model){
         // findById() returns an Optional<T> which can be null, so we have to test
         Optional<BlogPost> post = blogPostRepository.findById(id);
@@ -66,6 +70,30 @@ public class BlogPostController {
         }
 
         return "blogpost/edit";
+    }
+
+    @RequestMapping(value = "/blogposts/update/{id}")
+    public String updateExistingPost(@PathVariable Long id, BlogPost blogPost, Model model){
+        Optional<BlogPost> post = blogPostRepository.findById(id);
+        if(post.isPresent()){
+            BlogPost actualPost = post.get();
+            actualPost.setTitle(blogPost.getTitle());
+            actualPost.setAuthor(blogPost.getAuthor());
+            actualPost.setBlogEntry(blogPost.getBlogEntry());
+            //save() is so awesome that it works for both creating new posts
+            // and overwriting exiting posts
+            //if the primary key of the Entity we give it matches the primary key
+            // of a record already in the database, it will save over it
+            //instead of creating a new record
+            blogPostRepository.save(actualPost);
+            model.addAttribute("blogPost", actualPost);
+
+            //option 1 that handles the whole blog update post
+            // model.addAttribute("title", actualPost.getTitle());
+            // model.addAttribute("author", actualPost.getAuthor());
+            // model.addAttribute("blogEntry", actualPost.getBlogEntry());            
+        }
+        return "blogpost/result";
     }
 
 }
