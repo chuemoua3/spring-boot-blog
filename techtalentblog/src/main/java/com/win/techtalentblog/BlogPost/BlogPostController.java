@@ -41,8 +41,8 @@ public class BlogPostController {
 
     @PostMapping(value = "/blogposts")
     public String addNewBlogPost(BlogPost blogPost, Model model) {
-        blogPostRepository.save(new BlogPost(blogPost.getTitle(), blogPost.getAuthor(), blogPost.getBlogEntry()));
-        
+        // blogPostRepository.save(new BlogPost(blogPost.getTitle(), blogPost.getAuthor(), blogPost.getBlogEntry()));
+        blogPostRepository.save(blogPost);
         // Add new blog posts as they're created to our posts list for indexing
         //posts.add(blogPost);
 
@@ -94,6 +94,14 @@ public class BlogPostController {
             // model.addAttribute("blogEntry", actualPost.getBlogEntry());            
         }
         return "blogpost/result";
+    }
+
+
+    //delete request
+    @RequestMapping(value = "blogposts/delete/{id}")
+    public String deletePostById(@PathVariable Long id, BlogPost blogPost){
+        blogPostRepository.deleteById(id);
+        return "blogpost/delete";
     }
 
 }
